@@ -1,0 +1,85 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply plugin: 'war'
+
+
+group = 'msenyonjo'
+version = '1.0'
+
+description = """msenyonjo-spring-security"""
+
+sourceCompatibility = 1.8
+
+repositories {
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+ext{
+   libVersion = [:]
+   
+   //compile runtime scope
+   libVersion.springframework="4.2.5.RELEASE"
+   libVersion.slf4j="1.7.5"
+ 
+}
+
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+ 	compile group: 'org.springframework.security', name: 'spring-security-web', version:'3.1.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version:'3.1.3.RELEASE'
+    
+    compile group: 'org.springframework', name: 'spring-core', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-context', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-jdbc', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-beans', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-aop', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-tx', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-expression', version: libVersion.springframework
+    compile group: 'org.springframework', name: 'spring-web', version: libVersion.springframework
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.1.2'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version:'4.2.0.Final'
+    compile group: 'com.google.guava', name: 'guava', version:'14.0.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:'3.1'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:libVersion.slf4j
+    compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.0.11'
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version:libVersion.slf4j
+    compile group: 'org.slf4j', name: 'log4j-over-slf4j', version:libVersion.slf4j
+   
+   
+    runtime group: 'javax.servlet', name: 'jstl', version:'1.2'
+    runtime group: 'javax.servlet', name: 'javax.servlet-api', version:'3.0.1'			// should be providedCompile
+    
+    testCompile group: 'junit', name: 'junit-dep', version:'4.11'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version:'1.3'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version:'1.3'
+    testCompile group: 'org.mockito', name: 'mockito-core', version:'1.9.5'
+ 
+    
+    compile(group: 'org.springframework', name: 'spring-webmvc', version:'4.2.5.RELEASE') {
+		exclude(module: 'commons-logging')
+    }	
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
