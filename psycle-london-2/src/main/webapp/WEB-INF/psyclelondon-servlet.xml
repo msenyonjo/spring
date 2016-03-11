@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util-3.2.xsd
+                           http://www.springframework.org/schema/context
+    						http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- <context:component-scan base-package="com.psclelondon.bike" />
+	<context:component-scan base-package="com.psyclelondon.DAOimpl.BikeDaoImpl" />  -->
+	<context:component-scan base-package="com.psyclelondon.controller" />
+	
+
+	<bean id="info1" class="com.psyclelondon.bike.PscycleBike" c:bikeName="Boardman Road Team"
+		c:bikeColour="Black" c:bikeHeight="6ft" c:bikeType="Road bike"
+		c:bikeGears="10" c:bikeCost="£999.99" c:bikeGenderType="Male"
+		c:attributes-ref="1attributes" />
+
+	<util:list value-type="" id="1attributes">
+		<value>features a T700 uni-directionalcarbon frame with a carbon fork
+			with a tapered steerer tube, with a BB30 bottom bracket and internal
+			cable routing</value>
+		<value>A Shimano 105/Tiagra groupset</value>
+		<value>Mavic CXP22 wheels</value>
+		<value>Continental Ultra Sport II 25mm tyres</value>
+		<value>Tektro R540 brakes</value>
+	</util:list>
+
+
+	<bean id="info2" class="com.psyclelondon.bike.PscycleBike" c:bikeName="Lapierre Sensium 100"
+		c:bikeColour="Black and blue" c:bikeHeight="5ft" c:bikeType="Road bike"
+		c:bikeGears="9" c:bikeCost="£1,1999" c:bikeGenderType="Male"
+		c:attributes-ref="2attributes" />
+
+	<util:list value-type="" id="2attributes">
+		<value>an easy bike to get along with</value>
+		<value>comfortable to ride for hours on end</value>
+		<value>agile, solid and reliable </value>
+		<value>comfortable ‘endurance’ geometry</value>
+		<value>lengthened head tube</value>
+	</util:list>
+
+	<bean id="info3" class="com.psyclelondon.bike.PscycleBike" c:bikeName="Fuji Sportif 1.1 LE"
+		c:bikeColour="Black and Grey" c:bikeHeight="5ft" c:bikeType="Road bike"
+		c:bikeGears="20" c:bikeCost="£1,100" c:bikeGenderType="Male"
+		c:attributes-ref="3attributes" />
+
+	<util:list value-type="" id="3attributes">
+		<value>quick, solid and reliable</value>
+		<value>dependable frame and fork and a well-considered equipment
+			package</value>
+		<value>Shimano's excellent hydraulic discs </value>
+		<value>hydroformed and double-butted aluminium</value>
+		<value>carbon legs and an alloy crown and steerer</value>
+	</util:list>
+
+
+	<bean id="info4" class="com.psyclelondon.bike.PscycleBike" c:bikeName="Cannondale CAAD10 105"
+		c:bikeColour="Black and Grey" c:bikeHeight="7ft" c:bikeType="Road bike"
+		c:bikeGears="10" c:bikeCost="£1,299" c:bikeGenderType="Male"
+		c:attributes-ref="4attributes" />
+
+	<util:list value-type="" id="4attributes">
+		<value>puts a lot of carbon bikes to shame</value>
+		<value>full Shimano 105 groupset</value>
+		<value>carbon fibre fork </value>
+		<value>tapered steerer tube</value>
+		<value>Shimano RS11 wheels</value>
+		<value>Prologo Kappa EVO saddle</value>
+	</util:list>
+	
+	<bean id="daoimpl" class="com.psyclelondon.DAOimpl.BikeDaoImpl">
+		<property name="bikeList">
+			<util:list list-class="java.util.ArrayList">
+				<ref bean="info1"/>  
+				<ref bean="info2"/>
+				<ref bean="info3"/>
+				<ref bean="info4"/>
+			</util:list>
+		</property>
+	</bean> 
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	
+
+</beans>

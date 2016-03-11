@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<configuration scan="true" scanPeriod="1 minutes">
+	<contextName>A1Console</contextName>
+	<variable name="LOGFILE_NAME" value="spring-security.v1-1.0" />
+	
+	
+	<jmxConfigurator />
+	<contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator" />
+	<root level="TRACE" />
+
+	<!-- Default -->
+	<!--   <variable name="logdir" value="${logdir:-${a1.rootdir}/logs}" />-->
+	<variable name="logLevel" value="WARN" />
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		 <file>/Users/muhamed.senyonjo/Desktop/Servers/apache-tomcat-8.0.30/logs/${LOGFILE_NAME}.log</file>  
+		 <!-- <file>logs/${LOGFILE_NAME}.log</file>     -->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${logdir}/${LOGFILE_NAME}.%d.log</fileNamePattern>
+			 <fileNamePattern>/Users/muhamed.senyonjo/Desktop/Servers/apache-tomcat-8.0.30/logs/${LOGFILE_NAME}.log/${LOGFILE_NAME}.%d.log</fileNamePattern> 
+			<!-- <fileNamePattern>/Users/muhamed.senyonjo/Desktop/apache-tomcat-8.0.30/logs/${LOGFILE_NAME}.%d.log</fileNamePattern> -->    
+			<file>logs/${LOGFILE_NAME}.log</file> 
+			<!-- keep 5 days' worth of history -->r
+			<maxHistory>5</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %.-1le %-35(%logger{1}:%L:) %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.msenyonjo.security" level="TRACE">
+		 <appender-ref ref="FILE" />
+		<!-- <appender-ref ref="STDOUT" /> -->
+	</logger>
+	
+	<!-- <logger name="org.springframework" level="error" additivity="false">
+		<appender-ref ref="FILE" />
+	</logger> -->
+	
+</configuration>
