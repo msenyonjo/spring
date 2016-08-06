@@ -9,19 +9,19 @@ apply plugin: 'tomcat'
 // JDK version source compatibility
 sourceCompatibility = 1.8
 
-group = 'name-me'
+group = 'springsecurity'
 
 // project version
 version = '1.0'
 
 // War file name
-war.baseName='name-me'
+war.baseName='springsecurity'
 
 
 //war.archiveName "YOUR_SPECIAL_NAME.war"
 /*war {
   
-    baseName = 'name-me'
+    baseName = 'springsecurity'
     version = '1.0-SNAPSHOT-' + System.currentTimeMillis();
 }
 war {
@@ -146,7 +146,7 @@ jettyRun{
 }
 
 jettyRunWar{
-  contextPath = "spring4"
+  contextPath = "security"
   httpPort = 8080
 }
 
